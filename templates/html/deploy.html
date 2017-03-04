@@ -1,0 +1,96 @@
+{% extends 'html/base.html' %}
+{% block header %}
+<script>
+function change_deploy(name,value) {
+    var a = document.getElementsByName(name)[0];
+    a.innerHTML=value+" <span class='caret'></span>";
+}
+</script>
+{% endblock %}
+{% block main %}
+    <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label input-lg">项目名称</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control input-lg" id="project_name" placeholder="项目名称"  name="project_name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label input-lg">项目环境</label>
+            <div class="btn-group">
+                <div style="margin-left: 15px">
+                    <button name="deploy" type="button" class="btn btn-default dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        灰度发布 <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a name="deploy"  onclick="change_deploy(this.name,this.innerHTML)">灰度发布</a></li>
+                        <li><a name="deploy" onclick="change_deploy(this.name,this.innerHTML)">正式发布</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label input-lg">发布器存放代码目录</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control input-lg" id="deploy_dir" placeholder="发布器存放代码目录" name="deploy_dir">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label input-lg">项目地址</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control input-lg" id="deploy_dir" placeholder="项目地址" name="project_dir">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label input-lg">项目语言</label>
+            <div class="btn-group">
+                <div style="margin-left: 15px">
+                    <button name="language" type="button" class="btn btn-default dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    php <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a name="language"  onclick="change_deploy(this.name,this.innerHTML)">php</a></li>
+                        <li><a name="language"  onclick="change_deploy(this.name,this.innerHTML)">java</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label input-lg">代码环境</label>
+            <div class="btn-group">
+                <div style="margin-left: 15px">
+                <button name="dev" type="button" class="btn btn-default dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                git <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a name="dev"  onclick="change_deploy(this.name,this.innerHTML)">git</a></li>
+                    <li><a name="dev"  onclick="change_deploy(this.name,this.innerHTML)">svn</a></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label input-lg">目标主机WebRoot</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control input-lg" name="target_webroot" id="target_webroot" placeholder="目标主机web根目录">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label input-lg">目标主机地址</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control input-lg" name="target_server" id="target_server" placeholder="目标主机地址">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label input-lg">目标主机版本库目录</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control input-lg" name="target_releases"  id="target_releases" placeholder="目标主机版本库目录">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default btn-lg">提交</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

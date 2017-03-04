@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auto  Deploy</title>
+    {% block header %}
+    {% endblock %}
+<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script>
+function change_nav() {
+    var a = document.getElementsByName(name)[0];
+    a.innerHTML=value+" <span class='caret'></span>";
+}
+</script>
+</head>
+<body>
+<div style="width: 80%;margin-left: 5%; ">
+    <h1 class="text-center navbar-fixed-top" style="margin-top: 30px;">Auto Manager System</h1>
+    <div style="margin-top: 80px;margin-bottom: 50px">
+        <ul class="nav nav-tabs ">
+          <li role="presentation" class="active" onclick="change_nav()"><a href="{% url 'Deploy.views.Host_Maneger' %}">主机管理</a></li>
+          <li role="presentation" onclick="change_nav()"><a href="{% url 'Deploy.views.Deploy' %}">项目发布</a></li>
+          <li role="presentation" onclick="change_nav()"><a href="{% url 'Deploy.views.Add_Deploy' %}">新增项目</a></li>
+        </ul>
+    </div>
+    {% block main %}
+    {% endblock %}
+    <div class="panel-footer navbar-fixed-bottom"><p style="text-align: center">Published by Dear © 2017</p></div>
+</div>
+</body>
+</html>
