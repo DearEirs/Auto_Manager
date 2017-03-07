@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 
 # Create your views here.
 from methods import clone_project,change_project_dir
-
+from saltapi import SaltAPI
 
 def Add_Deploy(request):
     print request.POST
@@ -28,3 +28,8 @@ def Index(request):
 
 def Host_Maneger(request):
     return render(request,'html/host_manager.html')
+
+def List_Host(request):
+    salt_api = SaltAPI()
+    host_list = salt_api.List_All_Key()
+    return  render(request,'html/list_host.html',{'host_list':host_list})

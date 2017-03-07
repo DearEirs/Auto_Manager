@@ -16,8 +16,12 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 
+from Deploy.views import List_Host
+
 
 urlpatterns = [
+    url(r'^$',List_Host,name='List_Host'),
     url(r'^admin/', admin.site.urls),
-    url(r'^deploy/',include('Deploy.urls'))
+    url(r'^deploy/',include('Deploy.urls')),
+
 ]
