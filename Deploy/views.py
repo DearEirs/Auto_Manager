@@ -21,15 +21,22 @@ def Deploy(request):
         return  render(request, 'html/deploy.html')
     return render(request, 'html/deploy.html')
 
-def Index(request):
-    if request.method == 'POST':
-        return  render(request, 'html/base.html')
-    return  render(request,'html/base.html')
+def Add_Host(request):
+    salt_api = SaltAPI()
+    minions, minions_pre = salt_api.List_All_Key()
+    return  render(request,'html/list_host.html',{'minions':minions,'minions_pre':minions_pre})
 
-def Host_Maneger(request):
-    return render(request,'html/host_manager.html')
+def Delete_Host(request,name):
+    salt_api = SaltAPI()
+    response = salt_api.Delete_Key(name)
+    return  redirect('Deploy.views.List_Host')
 
 def List_Host(request):
     salt_api = SaltAPI()
-    host_list = salt_api.List_All_Key()
-    return  render(request,'html/list_host.html',{'host_list':host_list})
+    minions, minions_pre = salt_api.List_All_Key()
+    host_list = minions+minions_pre
+    ip = salt_api.remote_server_info('*','cmd.run',"ifconfig  | grep 'inet addr:' |grep -v 127.0.0.1|cut -d'B' -f 1|cut -d':' -f 2")['return'][0].values()
+    os = salt_api.remote_server_info('*','cmd.run','cat /etc/issue')['return'][0].values()
+    is_alive = salt_api.is_salt_alive('*').values()
+    data=zip(host_list,ip,os,is_alive)
+    return  render(request,'html/list_host.html',{'data':data})

@@ -21,7 +21,7 @@ function change_nav() {
     <h1 class="text-center navbar-fixed-top" style="margin-top: 30px;">Auto Manager System</h1>
     <div style="margin-top: 80px;margin-bottom: 50px">
         <ul class="nav nav-tabs ">
-          <li role="presentation" class="active" onclick="change_nav()"><a href="{% url 'Deploy.views.Host_Maneger' %}">主机管理</a></li>
+          <li role="presentation" class="active" onclick="change_nav()"><a href="{% url 'Deploy.views.List_Host' %}">主机管理</a></li>
           <li role="presentation" onclick="change_nav()"><a href="{% url 'Deploy.views.Deploy' %}">项目发布</a></li>
           <li role="presentation" onclick="change_nav()"><a href="{% url 'Deploy.views.Add_Deploy' %}">新增项目</a></li>
         </ul>
