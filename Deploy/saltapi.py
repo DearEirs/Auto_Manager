@@ -71,7 +71,7 @@ class SaltAPI(object):
         jid = content['return'][0]['jid']
         return jid
 
-    def file_copy(self, tgt, fun, arg1, arg2, expr_form):
+    def File_Copy(self, tgt, fun, arg1, arg2, expr_form):
         params = {'client': 'local', 'tgt': tgt, 'fun': fun, 'arg': arg1, 'expr_form': expr_form}
         params2 = {'arg': arg2}
         arg_add = urllib.urlencode(params2)
@@ -82,7 +82,7 @@ class SaltAPI(object):
         ret = content['return'][0]
         return ret
 
-    def remote_server_info(self,tgt,fun,arg=None):
+    def Remote_Server_Info(self,tgt,fun,arg=None):
         if not arg:
             params = {'client': 'local', 'tgt': tgt, 'fun': fun}
         else:
@@ -93,7 +93,7 @@ class SaltAPI(object):
         ret = content
         return ret
 
-    def is_salt_alive(self,tgt):
+    def Is_Salt_Alive(self,tgt):
         params = {'client': 'local', 'tgt': tgt, 'fun': 'test.ping'}
         obj = urllib.urlencode(params)
         self.Get_Token()

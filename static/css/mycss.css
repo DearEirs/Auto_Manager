@@ -1,0 +1,10 @@
+#add {
+    width: 600px;
+    float: right;
+    margin-bottom: 5px;
+}
+div #add{
+    width: 600px;
+    float: right;
+    margin-bottom: 5px;
+}

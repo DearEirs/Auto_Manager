@@ -1,14 +1,60 @@
 {% extends 'html/base.html' %}
+{% block header %}
+    <script>
+        function add_host() {
+            var note_name = document.getElementById('add_host').value;
+            $.ajax({
+            url:"{% url 'Add_Host' %}",
+            type: "POST",
+            dataType: "json",
+            data: { note_name:note_name },
+            success:function (s) {
+                alert(s);
+                window.location.reload();
+                 },
+            error:function (e) {
+                alert(e)
+            }
+    });
+        }
+        function delete_host(a) {
+            $.ajax({
+            url:"{% url 'Delete_Host' %}",
+            type: "POST",
+            dataType: "json",
+            data: { note_name:a.value },
+            success:function (s) {
+                alert(s);
+                window.location.reload();
+                 },
+            error:function (e) {
+                alert(e)
+            }
+    });
+        }
+
+    </script>
+{% endblock %}
 {% block main %}
-    <table class="table table-hover">
+    <div style="width: 600px;float: right;margin-bottom: 5px;">
+        <div class="col-lg-6" style="float: right">
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control"  id="add_host" placeholder="添加主机">
+                <span class="input-group-btn">
+                    <button class="btn btn-info" type="button"  onclick="add_host()">添加</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <table class="table table-hover ">
         <tr><td>主机名</td><td>IP</td><td>系统</td><td>存活状态</td><td>操作</td></tr>
         {% for i in  data %}
-            <tr>
+            <tr style="height: 50px;font-size: 20px">
                 <td>{{ i.0 }}</td>
                 <td>{{ i.1 }}</td>
                 <td>{{ i.2 }}</td>
                 <td>{{ i.3 }}</td>
-                <td><a href="{% url 'Delete_Host' name=i.0  %}">删除</a>&nbsp;&nbsp;<a href="#">远程操作</a></td>
+                <td><button class="btn btn-danger" type="button" value="{{ i.0 }}" onclick="delete_host(this)">删除</button>&nbsp;&nbsp;<a href="#">远程操作</a></td>
             </tr>
         {% endfor %}
     </table>

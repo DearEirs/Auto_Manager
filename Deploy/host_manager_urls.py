@@ -15,11 +15,12 @@ Including another URLconf
 """
 
 from django.conf.urls import url
-from Deploy.views import List_Host,Add_Host,Delete_Host
+from Deploy.views import List_Host,Add_Host,Delete_Host,Remote_Execution
 
 
 urlpatterns = [
     url(r'^$',List_Host,name='List_Host'),
-    url(r'Add/?P<note_name>.*?/$',Add_Host, name='Add_Host'),
-    url(r'Delete/(?P<name>.*?)$', Delete_Host, name='Delete_Host'),
+    url(r'Add',Add_Host, name='Add_Host'),
+    url(r'Delete', Delete_Host, name='Delete_Host'),
+    url(r'remote_exe',Remote_Execution,name='Remote_Execution')
 ]
