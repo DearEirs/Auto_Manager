@@ -19,13 +19,10 @@ function change_deploy(name,value) {
             <label for="inputPassword3" class="col-sm-2 control-label input-lg">项目环境</label>
             <div class="btn-group">
                 <div style="margin-left: 15px">
-                    <button name="deploy" type="button" class="btn btn-default dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        灰度发布 <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a name="deploy"  onclick="change_deploy(this.name,this.innerHTML)">灰度发布</a></li>
-                        <li><a name="deploy" onclick="change_deploy(this.name,this.innerHTML)">正式发布</a></li>
-                    </ul>
+                    <select class="form-control input-lg" name="project_env" id="aaa">
+                        <option name="hdfb">灰度发布</option>
+                        <option name="zsfb">正式发布</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -45,13 +42,10 @@ function change_deploy(name,value) {
             <label for="inputPassword3" class="col-sm-2 control-label input-lg">项目语言</label>
             <div class="btn-group">
                 <div style="margin-left: 15px">
-                    <button name="language" type="button" class="btn btn-default dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    php <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a name="language"  onclick="change_deploy(this.name,this.innerHTML)">php</a></li>
-                        <li><a name="language"  onclick="change_deploy(this.name,this.innerHTML)">java</a></li>
-                    </ul>
+                    <select class="form-control input-lg" name="project_language">
+                        <option name="php">php</option>
+                        <option name="java">java</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -59,13 +53,10 @@ function change_deploy(name,value) {
             <label for="inputPassword3" class="col-sm-2 control-label input-lg">代码环境</label>
             <div class="btn-group">
                 <div style="margin-left: 15px">
-                <button name="dev" type="button" class="btn btn-default dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                git <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a name="dev"  onclick="change_deploy(this.name,this.innerHTML)">git</a></li>
-                    <li><a name="dev"  onclick="change_deploy(this.name,this.innerHTML)">svn</a></li>
-                </ul>
+                    <select class="form-control input-lg" name="code_env">
+                            <option name="git">git</option>
+                            <option name="svn">svn</option>
+                    </select>
                 </div>
             </div>
         </div>

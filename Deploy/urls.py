@@ -19,7 +19,7 @@ from Deploy.views import Add_Deploy,Deploy,Delete_Host
 
 
 urlpatterns = [
-    url(r'^Add_Deploy/$', Add_Deploy, name='Add_Deploy'),
-    url(r'^Deploy/$', Deploy, name='Deploy'),
+    url(r'Add_Deploy', Add_Deploy, name='Add_Deploy'),
+    url(r'Deploy', Deploy, name='Deploy'),
 
 ]

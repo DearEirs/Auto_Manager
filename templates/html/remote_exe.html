@@ -15,17 +15,31 @@
                     'args':args
                 },
                 success:function (s) {
-                    for (i in s){
-                        var pa = document.createElement("h3");
-                        var no=document.createTextNode(i);
-                        pa.appendChild(no);
-                        var para = document.createElement("p");
-                        var node=document.createTextNode(s[i]);
-                        para.appendChild(node);
+                    $("#result").empty();
+                    function get_data(d){
                         var element=document.getElementById("result");
-                        element.appendChild(pa);
-                        element.appendChild(para);
+                        for (i in d){
+                            var pa = document.createElement("h3");
+                            var no=document.createTextNode(i);
+                            pa.appendChild(no);
+                            element.appendChild(pa);
+                            if (typeof d[i]=='object'){
+                                if(get_data(d[i])){
+                                    var para = document.createElement("h3");
+                                    var note=document.createTextNode(get_data(d[i]));
+                                    para.appendChild(note);
+                                    element.appendChild(para);
+                                }
+                            }
+                            else {
+                                var para = document.createElement("p");
+                                var node=document.createTextNode(d[i]);
+                                para.appendChild(node);
+                                element.appendChild(para);
+                            }
+                        }
                     }
+                    get_data(s)
                 },
                 error:function (e) {
                     alert(e)
@@ -36,7 +50,7 @@
 {% endblock %}
 
 {% block main %}
-    <div class="col-lg-6" style="float: right">
+    <div class="col-lg-6" style="float: right;">
         <div class="input-group input-group-lg">
             <table class="table">
                 <tr>
@@ -54,10 +68,10 @@
     </div>
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h3 class="panel-title" style="font-size: 22px;">返回结果</h3>
+            <h3 class="panel-title" style="font-size: 22px;height: 40px;line-height: 40px;">返回结果</h3>
         </div>
         <div class="panel-body">
-            <pre>
+            <pre style="width: 100%">
                 <span id="result"></span>
             </pre>
         </div>

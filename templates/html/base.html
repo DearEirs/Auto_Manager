@@ -1,39 +1,165 @@
-{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Auto  Deploy</title>
-    {% block header %}
-    {% endblock %}
-<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script src="../../static/javascript/jquery.js"></script>
-<script>
-function change_nav() {
-    $('#eew').toggleClass('btn btn-info');
-}
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-</script>
-</head>
-<body>
-<div style="width: 80%;margin-left: 5%;" class="navbar-fixed-top">
-    <h1 style="margin-left: 30%">Auto Manager System</h1>
-    <div>
-        <ul class="nav nav-tabs ">
-            <li role="presentation"><a href="{% url 'Deploy.views.List_Host' %}">主机管理</a></li>
-            <li role="presentation"><a href="{% url 'Deploy.views.Remote_Execution' %}">批量执行命令</a></li>
-            <li role="presentation"><a href="{% url 'Deploy.views.Deploy' %}">项目发布</a></li>
-            <li role="presentation"><a href="{% url 'Deploy.views.Add_Deploy' %}">新增项目</a></li>
-        </ul>
-    </div>
-</div>
-<div style="margin-top: 160px;width: 80%; margin-left: 5%">
-    {% block main %}
-    {% endblock %}
-</div>
-    <div class="panel-footer navbar-fixed-bottom"><p style="text-align: center">Published by Dear © 2017</p></div>
+        <title>管理平台</title>
 
-</body>
+        <!-- Bootstrap -->
+        <link href="/statics/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <!-- Font Awesome -->
+        <link href="/statics/css/font-awesome.min.css" rel="stylesheet">
+        {% block header %}
+        {% endblock %}
+        <!-- Custom Theme Style -->
+        <link href="/statics/css/custom.min.css" rel="stylesheet">
+    </head>
+
+    <body class="nav-md">
+        <div class="container body">
+            <div class="main_container">
+                <div class="col-md-3 left_col">
+                    <div class="left_col scroll-view">
+                        <div class="navbar nav_title" style="border: 0;">
+                            <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>运维平台</span></a>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <!-- menu profile quick info -->
+                        <div class="profile">
+                            <div class="profile_pic">
+                                <img src="/statics/img/avatar2.jpg" alt="..." class="img-circle profile_img">
+                            </div>
+                            <div class="profile_info">
+                                <span>Welcome,</span>
+                                <h2>{% if request.user.last_name %}{{ request.user.last_name  }}{% endif %}{% if request.user.first_name %}{{ request.user.first_name  }}{% else %}{{ request.user  }}{% endif %}</h2>
+                            </div>
+                        </div>
+                        <!-- /menu profile quick info -->
+
+                        <br />
+
+                        <!-- sidebar menu -->
+                        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                            <div class="menu_section">
+                                <ul class="nav side-menu">
+                                    <li><a><i class="fa fa-cubes"></i> 部署管理 <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{% url 'List_Host' %}">主机管理</a></li>
+                                        <li><a href="{% url 'Remote_Execution' %}">远程命令</a></li>
+                                    </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-folder-open"></i> 文件管理 <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="#">文件下载</a></li>
+                                        <li><a href="#">文件上传</a></li>
+                                        <li><a href="#">文件回滚</a></li>
+                                    </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-folder-open"></i> 代码管理 <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{% url 'Deploy' %}">代码发布</a></li>
+                                        <li><a href="#">代码回滚</a></li>
+                                    </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-desktop"></i> 任务管理 <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="#">任务列表</a></li>
+                                        <li><a href="#">任务查询</a></li>
+                                    </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-bars"></i> 资产管理 <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="#">服务器资产</a></li>
+                                        <li><a href="#">数据中心</a></li>
+                                    </ul>
+                                    </li>
+                                    {% if request.user.is_superuser %}
+                                    <li><a><i class="fa fa-cogs"></i> 用户管理 <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="#">远程命令</a></li>
+                                        <li><a href="#">远程目录</a></li>
+                                    </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-arrows"></i> 日志审计 <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="#">操作日志</a></li>
+                                    </ul>
+                                    </li>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- /sidebar menu -->
+
+                            <!-- /menu footer buttons -->
+                            <div class="sidebar-footer hidden-small">
+                                <a href="#" data-toggle="tooltip" data-placement="top" title="Logout">
+                                    <span class="fa fa-sign-out" aria-hidden="true"></span>
+                                </a>
+                            </div>
+                            <!-- /menu footer buttons -->
+                        </div>
+                    </div>
+
+                    <!-- top navigation -->
+                    <div class="top_nav">
+                        <div class="nav_menu">
+                            <nav class="" role="navigation">
+                                <div class="nav toggle">
+                                    <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                                </div>
+
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="">
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <img src="/statics/img/avatar2.jpg" alt="">{{ request.user }}<span class=" fa fa-angle-down"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                        <li><a href="/admin/"> Profile</a></li>
+                                        <li><a href="/">Help</a></li>
+                                        <li><a href="#"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                    </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- /top navigation -->
+
+                    <!-- page content -->
+            <div class="right_col" role="main">
+            <div style="margin-top: 55px;">
+                    {% block main %}
+                    {% endblock %}
+            </div>
+            </div>
+                    <!-- /page content -->
+
+                    <!-- footer content -->
+                    <footer>
+                        <div class="pull-right">
+                            运维平台 - Powered by <a href="#" target="_blank">Dear</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </footer>
+                    <!-- /footer content -->
+                </div>
+            </div>
+
+        <!-- jQuery -->
+        <script src="/statics/js/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="/statics/js/bootstrap.min.js"></script>
+        {% block js %}
+        {% endblock %}
+        <!-- Custom Theme Scripts -->
+        <script src="/statics/js/custom.min.js"></script>
+
+
+    </body>
 </html>

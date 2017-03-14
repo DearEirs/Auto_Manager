@@ -82,11 +82,12 @@ class SaltAPI(object):
         ret = content['return'][0]
         return ret
 
-    def Remote_Server_Info(self,tgt,fun,arg=None):
+    def Remote_Server_Info(self,tgt,fun,arg):
         if not arg:
             params = {'client': 'local', 'tgt': tgt, 'fun': fun}
         else:
             params = {'client': 'local', 'tgt': tgt, 'fun': fun,'arg':arg}
+        print arg
         obj = urllib.urlencode(params)
         self.Get_Token()
         content = self.Post_Request(obj)
@@ -118,5 +119,4 @@ print a['return'][0]['minion']['cpuinfo']['cpu cores']
 for i in  a['return'][0]['minion']:
     print i
 '''
-
 #print SaltAPI().remote_server_info('*','cmd.run',"ifconfig  | grep 'inet addr:' |grep -v 127.0.0.1|cut -d'B' -f 1|cut -d':' -f 2")
